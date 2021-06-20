@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ModelEF.Model.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section header{
+    <i class="fa fa-user"></i>&nbsp;Quản Lý Sản Phẩm
+}
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    <div class="col-lg-12 form-group">
+        <div class="col-md-6">
+            @Html.ActionLink("Tạo mới", "Create", "Product", new { @class = "btn btn-danger" })
+        </div>
+        <div class="col-md-4">
+            <input type="text" value="@ViewBag.SearchProduct" name="searchProduct" placeholder="Nhập từ cần tìm: " class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+
+
+        <th>
+            Tên Sản Phẩm
+        </th>
+        <th>
+           Gía
+        </th>
+        <th>
+          Số Lượng
+        </th>
+        <th>
+           Ảnh
+        </th>
+        <th>
+            Mô Tả
+        </th>
+        <th>
+            Hãng
+        </th>
+        <th>
+            Trạng Thái
+        </th>
+        <th>
+            Thao Tác
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                <img src=@item.Image width="80" height="80">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { idProduct = item.ID }) |
+                &nbsp;
+                @Html.ActionLink("Details", "Details", new { idProduct = item.ID }) |
+                &nbsp;
+                @Ajax.ActionLink("Delete", "Delete", new { @id = item.ID }, new AjaxOptions
+               {
+                Confirm = "Bạn có muốn xoá " + @item.ID + "?",
+                OnComplete = "$('#row_" + @item.ID + "').remove()",
+                HttpMethod = "Delete"
+
+               })
+            </td>
+        </tr>
+    }
+
+</table>

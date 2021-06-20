@@ -1,0 +1,93 @@
+﻿@model ModelEF.Model1.ProductCategoryModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <i class="fa fa-user"></i>&nbsp;Chi Tiết Sản Phẩm
+}
+
+<link href="~/Assets/css/product.css" rel="stylesheet" />
+
+<div>
+   
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Tên Sản Phẩm
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Gía Sản Phẩm
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.UnitCost)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Ảnh
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Image)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Số Lượng Sản Phẩm
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Quantity)
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>
+                Chi Tiết Sản Phẩm
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Trạng Thái Sản Phẩm
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Status)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Hãng
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.CategoryName)
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { idProduct = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
